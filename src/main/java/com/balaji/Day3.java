@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class Day3 {
     private static String[][] fabric = new String[1000][1000];
@@ -28,12 +29,11 @@ public class Day3 {
                 );
             }
         }
-        for (int i = 1; i < clashes.length; i++) {
-            int clash = clashes[i];
-            if (clash == 0) {
-                System.out.println(i);
-            }
-        }
+        int clash = IntStream.range(1, clashes.length)
+                .filter(i -> clashes[i] == 0)
+                .findFirst().orElse(-1);
+
+        System.out.println(clash);
         System.out.println(count);
     }
 
