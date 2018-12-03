@@ -33,7 +33,7 @@ public class Day1 {
                 break;
             }
             inter.add(total);
-            if (count == i) {
+            if (i == count) {
                 i = 0;
             }
         }
