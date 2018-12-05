@@ -16,9 +16,9 @@ public class Day4 {
         Arrays.sort(input, 0, count);
 
         int i = -1;
-        String id = null;
-        HashMap<String, Integer[]> att2 = new HashMap<>();
+        Map<String, Integer[]> att2 = new HashMap<>();
         while (i < count - 1) {
+            String id = null;
             if (input[++i].contains("Guard")) {
                 if (input[i + 1].contains("Guard")) continue;
                 id = input[i].split(" ")[3].substring(1);
@@ -29,12 +29,10 @@ public class Day4 {
                 String sleep = input[++i];
                 String wakes = input[++i];
 
-                String sleepTime = sleep.substring(1, sleep.indexOf(']'));
-                String wakeUpTime = wakes.substring(1, wakes.indexOf(']'));
-
-                final String fid = id;
-                IntStream.range(minutes(sleepTime), minutes(wakeUpTime))
-                        .forEach(t -> att2.get(fid)[t]++);
+                String finalId = id;
+                IntStream.range(minutes(sleep.substring(1, sleep.indexOf(']'))),
+                                minutes(wakes.substring(1, wakes.indexOf(']'))))
+                        .forEach(t -> att2.get(finalId)[t]++);
             } while (i < count - 1 && !input[i + 1].contains("Guard"));
         }
 
